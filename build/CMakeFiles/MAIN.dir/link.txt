@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/MAIN.dir/link.d CMakeFiles/MAIN.dir/scraper.cpp.o -o MAIN  /home/prabh/.local/bin/vcpkg-git/installed/x64-linux/debug/lib/libcurl-d.a /usr/lib/libssl.so /usr/lib/libcrypto.so /usr/lib/libz.so /usr/lib/libcrypto.so /usr/lib/libz.so
