@@ -3,6 +3,8 @@
 #include <fstream>      // File stream operations
 #include <iostream>     // Input/output streams
 #include <string>       // String class
+#include <regex>
+#include <vector>
 
 using namespace std;
 
@@ -110,6 +112,29 @@ void save_file_to(string filepath, string filename, string content) {
   MyFile.close();
 }
 
+
+
+vector<string> extract_links(string html_document) {
+
+  // This function can be implemented using regex or an HTML parsing library
+  cout << "Extracting links from the document..." << endl;
+  vector<string> links; // This will hold the extracted links
+
+ regex link_regex = regex(R"(href\s*=\s*["']([^"']*)["'])", regex::icase); // Simple regex to match href attributes
+
+  auto begin = sregex_iterator(html_document.begin(), html_document.end(), link_regex);
+  auto end = sregex_iterator();
+
+  for (auto i = begin; i != end; ++i) {
+    smatch match = *i;
+    links.push_back(match[1].str()); // Extract the URL from the href attribute
+  }
+
+  return links; // Return the list of extracted links
+
+  
+}
+
 // Main function - entry point of the program
 int main() {
   // Initialize libcurl global resources (must be called once before using curl)
@@ -149,6 +174,15 @@ int main() {
   // Save the scraped content to a file
   // Parameters: filepath (directory), title (filename), html_document (content)
   save_file_to(filepath, title, html_document);
+
+  // Look for links in the scraped HTML document
+  vector<string> links = extract_links(html_document);
+
+  for (const auto& link : links) {
+      cout << link << endl;
+  }
+
+  cout << "Links scraped" << endl;
   
 
   // Exit successfully
