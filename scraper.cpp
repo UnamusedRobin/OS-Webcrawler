@@ -130,18 +130,17 @@ vector<string> extract_links(string html_document) {
     links.push_back(match[1].str()); // Extract the URL from the href attribute
   }
 
-  return links; // Return the list of extracted links
-
-  
+  return links; // Return the list of extracted links 
 }
 
 // Main function - entry point of the program
 int main() {
+  cout << "Starting the app" << endl;
   // Initialize libcurl global resources (must be called once before using curl)
   curl_global_init(CURL_GLOBAL_ALL);
   
   // Define the directory path where files will be saved
-  string filepath = "./data";
+  string filepath = "./pages";
 
   // Print status message to indicate scraping is starting
   cout << "Scraping data" << endl;
